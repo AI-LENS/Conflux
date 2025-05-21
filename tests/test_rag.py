@@ -232,7 +232,7 @@ def test_rag_example():
 
     with (
         patch("conflux.handlers.OpenAiLLM", type(dummy_openai)),
-        patch.object(rag, "encode", dummy_encoder),
+        patch("examples.rag_example.encode", dummy_encoder),
     ):
         rag.main(dim=32)
 
