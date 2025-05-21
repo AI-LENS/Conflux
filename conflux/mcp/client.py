@@ -1,7 +1,7 @@
-from fastmcp.utilities.mcp_config import MCPConfig
 from fastmcp import Client
-from mcp.types import TextContent
 from fastmcp.exceptions import ToolError
+from fastmcp.utilities.mcp_config import MCPConfig
+from mcp.types import TextContent
 
 
 class MCPClient:

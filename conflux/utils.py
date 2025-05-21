@@ -10,7 +10,7 @@ import numpy as np
 from PIL import Image
 
 if TYPE_CHECKING:
-    from conflux import Handler, Message, History
+    from conflux import Handler, History, Message
 
 string_formatter = string.Formatter()
 

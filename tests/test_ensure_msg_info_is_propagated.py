@@ -18,7 +18,9 @@ async def remove_punctuation(msg: Message, chain: HandlerChain) -> Message:
 
 @handler
 async def reverse(msg: Message, chain: HandlerChain) -> Message:
-    assert msg.info == {"info-1": "info-1", "info-2": "info-2"}, f"Message info not propagated, {msg.info}"
+    assert msg.info == {"info-1": "info-1", "info-2": "info-2"}, (
+        f"Message info not propagated, {msg.info}"
+    )
     return msg[::-1]
 
 

@@ -1,1 +1,2 @@
-from conflux.base import Handler, HandlerChain, History, Message, handler  # noqa: F401
+from conflux.base import (Handler, HandlerChain, History,  # noqa: F401
+                          Message, handler)

@@ -5,9 +5,8 @@ from typing import Callable, Iterable, TypeVar
 from openai import AsyncOpenAI
 from openai._utils import async_transform
 from openai.types.chat.chat_completion import ChatCompletion
-from openai.types.chat.chat_completion_content_part_param import (
-    ChatCompletionContentPartParam,
-)
+from openai.types.chat.chat_completion_content_part_param import \
+    ChatCompletionContentPartParam
 from openai.types.chat.completion_create_params import CompletionCreateParams
 from pydantic import BaseModel
 

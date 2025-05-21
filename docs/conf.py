@@ -40,12 +40,12 @@ html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
 
 html_sidebars = {
-    '**': [
-        'getting-started.html',
-        'base.html',
-        'handlers.html',
-        'similarity.html',
-        'examples.html',
+    "**": [
+        "getting-started.html",
+        "base.html",
+        "handlers.html",
+        "similarity.html",
+        "examples.html",
     ]
 }
 

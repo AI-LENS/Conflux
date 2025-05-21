@@ -32,9 +32,9 @@ class Record(BaseModel):
         if len(semantic_texts) == 1:
             return next(iter(semantic_texts.values()))
         else:
-            return "\n".join([
-                f"{attr}: {text}" for attr, text in semantic_texts.items()
-            ])
+            return "\n".join(
+                [f"{attr}: {text}" for attr, text in semantic_texts.items()]
+            )
 
 
 class SimpleRecord(Record):
@@ -91,9 +91,9 @@ class VectorDB(Protocol[T]):
         last_string_id = len(self._strings_store)
 
         for record in dataset:
-            assert isinstance(
-                record, Record
-            ), f"Invalid record type: {type(record)}, expected Record."
+            assert isinstance(record, Record), (
+                f"Invalid record type: {type(record)}, expected Record."
+            )
             # Assign a new record ID based on the current length of the records store
             record_id = len(self._records_store)
             self._records_store.append(record)
