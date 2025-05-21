@@ -10,23 +10,20 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - name: Set up Python 🐍
-        uses: actions/setup-python@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: '3.12' # Specify Python 3.12
+          python-version: '3.13'
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
 
-      - name: Install pipx and Poetry 🔧
-        run: |
-            python3 -m pip install --user pipx
-            python3 -m pipx ensurepath
-            pipx install poetry
-            poetry lock
-            poetry install --no-root --only dev
+      - name: Install the project
+        run: uv sync --locked --all-extras --dev
 
       - name: Build docs 📚
         run: |
           cd docs
-          poetry run make html
+          uv run make html
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
