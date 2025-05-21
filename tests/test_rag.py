@@ -10,6 +10,10 @@ async def dummy_openai(msg, chain):
     return msg
 
 
+async def dummy_openai_llm_process_side_effect(hanlder, msg, chain):
+    return msg
+
+
 def dummy_encoder(texts: list[str], mode, dim: int = 512) -> np.ndarray:
     if len(texts) == 1:
         return np.array([
@@ -228,12 +232,12 @@ class dummy_client:
 
 
 def test_rag_example():
-    import examples.rag_example as rag
 
     with (
         patch("conflux.handlers.OpenAiLLM", type(dummy_openai)),
         patch("examples.rag_example.encode", dummy_encoder),
     ):
+        import examples.rag_example as rag
         rag.main(dim=32)
 
 
