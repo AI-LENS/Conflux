@@ -12,7 +12,7 @@ from pathlib import Path
 
 sys.path.insert(0, os.path.abspath("."))
 
-project = "Interact"
+project = "conflux"
 copyright = "2023, Pritam Dey"
 author = "Pritam Dey"
 

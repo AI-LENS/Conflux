@@ -2,8 +2,8 @@ import asyncio
 
 from dotenv import load_dotenv
 
-from interact import HandlerChain, Message, handler
-from interact.handlers import OpenAiLLM
+from conflux import HandlerChain, Message, handler
+from conflux.handlers import OpenAiLLM
 
 load_dotenv()
 

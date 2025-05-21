@@ -1,19 +1,23 @@
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
 from unittest.mock import patch
-from interact.handlers import OpenAiLLM
 
 import pytest
+
+from conflux.handlers import OpenAiLLM
 
 EXAMPLES_DIR = Path("examples")
 llm_call_count = 0
 
 
 def get_example_files():
-    return list(EXAMPLES_DIR.glob("*.py"))
+    # Exclude __init__.py from the list of example files
+    return [f for f in EXAMPLES_DIR.glob("*.py") if f.name != "__init__.py"]
+
 
 def openai_llm_init_side_effect(self, *args, **kwargs):
     self.role = "llm"
+
 
 async def dummy_openai_llm_process_side_effect(hanlder, msg, chain):
     return msg
@@ -49,6 +53,6 @@ def test_example(example_file: Path):
         assert True
         return None
     with patch.object(OpenAiLLM, "__init__", openai_llm_init_side_effect):
-        with patch("interact.handlers.OpenAiLLM.process", side_effect):
+        with patch("conflux.handlers.OpenAiLLM.process", side_effect):
             module = import_module_from_path(example_file)
             module.main()

@@ -1,6 +1,6 @@
 import asyncio
 
-from interact import HandlerChain, Message, handler
+from conflux import HandlerChain, Message, handler
 
 
 @handler

@@ -2,8 +2,8 @@ import asyncio
 
 from dotenv import load_dotenv
 
-from interact import Handler, HandlerChain, Message
-from interact.handlers import OpenAiLLM
+from conflux import Handler, HandlerChain, Message
+from conflux.handlers import OpenAiLLM
 
 load_dotenv()  # assuming that the OpenAI api key is set in the environment
 

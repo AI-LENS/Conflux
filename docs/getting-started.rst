@@ -17,7 +17,7 @@ Core Concept
         C --> Output["Output (Message)"]
 
 
-``Interact`` has three main components / assumptions:
+``Conflux`` has three main components / assumptions:
 
 - Entities in an application communicate through ``Message`` s.
 - ``Message`` s are passed through ``Handler`` s that can modify (transform, format, etc.) the ``Message``.
@@ -41,8 +41,8 @@ Importing neccessary modules
 
     from dotenv import load_dotenv
 
-    from interact import HandlerChain, Message, handler
-    from interact.handlers import OpenAiLLM
+    from conflux import HandlerChain, Message, handler
+    from conflux.handlers import OpenAiLLM
 
     load_dotenv()  # load openai api key from .env file
 
@@ -71,7 +71,7 @@ We define two ``Handler`` s, ``CompanyNamePrompt`` and ``CompanyTaglinePrompt`` 
 
 Note that:
 
-- Interact allows you to define simple async functions as ``Handler`` s. These functions are responsible for *transforming* the ``Message`` s.
+- Conflux allows you to define simple async functions as ``Handler`` s. These functions are responsible for *transforming* the ``Message`` s.
 - You may choose to do anything inside these functions, including making API calls, formatting the prompts, anything your application needs to transform the input ``Message``.
 - The functions are decorated with the ``@handler`` decorator to indicate that they are ``Handler`` s. Under the hood, the decorator creates a ``Handler`` object from the function.
 - The input to the function is a ``Message`` and current ``HandlerChain``. The ``Message`` is the resulting output from the previous ``Handler`` in the ``HandlerChain``.

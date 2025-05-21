@@ -1,7 +1,7 @@
 Handler Classes
 ===============
 
-.. automodule:: interact.handlers
+.. automodule:: conflux.handlers
    :members:
    :undoc-members:
    :show-inheritance:

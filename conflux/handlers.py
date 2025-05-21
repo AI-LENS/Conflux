@@ -11,9 +11,9 @@ from openai.types.chat.chat_completion_content_part_param import (
 from openai.types.chat.completion_create_params import CompletionCreateParams
 from pydantic import BaseModel
 
-from interact import Handler, HandlerChain, Message
-from interact.exceptions import HandlerError
-from interact.retrieval import Record, VectorDB
+from conflux import Handler, HandlerChain, Message
+from conflux.exceptions import HandlerError
+from conflux.retrieval import Record, VectorDB
 
 
 class OpenAiLLM(Handler):

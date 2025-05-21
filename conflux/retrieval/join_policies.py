@@ -1,4 +1,4 @@
-from interact.retrieval import SimpleRecord
+from conflux.retrieval import SimpleRecord
 
 
 def numbered_paragraphs(records: list[SimpleRecord]) -> str:

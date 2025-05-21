@@ -5,10 +5,10 @@ from typing import Literal
 import numpy as np
 from openai import OpenAI
 
-from interact import HandlerChain, Message, handler
-from interact.handlers import OpenAiLLM, SimilarityRetriever
-from interact.retrieval import SimpleRecord
-from interact.retrieval.faiss import FaissIndexDB
+from conflux import HandlerChain, Message, handler
+from conflux.handlers import OpenAiLLM, SimilarityRetriever
+from conflux.retrieval import SimpleRecord
+from conflux.retrieval.faiss import FaissIndexDB
 
 # an example dataset to demonstrate rag
 article = """In 2032, a dog named Timmy made history by becoming the first canine to land on Mars. At the age of 5, Timmy was specially selected for the mission due to his calm temperament and ability to adapt to new environments.

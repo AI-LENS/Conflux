@@ -7,9 +7,9 @@ from collections.abc import Sequence
 from copy import copy
 from typing import Any, Callable, Coroutine, Literal, overload
 
-from interact.exceptions import HandlerError, UnsupportedHandlerChain
-from interact.types import Variables
-from interact.utils import image_to_base64
+from conflux.exceptions import HandlerError, UnsupportedHandlerChain
+from conflux.types import Variables
+from conflux.utils import image_to_base64
 
 
 class Message(UserString):

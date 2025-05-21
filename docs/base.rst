@@ -1,7 +1,7 @@
 Base Classes
 =============
 
-.. automodule:: interact.base
+.. automodule:: conflux.base
    :members:
    :undoc-members:
    :show-inheritance:

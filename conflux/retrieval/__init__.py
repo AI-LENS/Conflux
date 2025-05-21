@@ -3,7 +3,7 @@ from typing import Annotated, Literal, Protocol, Sequence, TypeVar
 import numpy as np
 from pydantic import BaseModel, ConfigDict, model_validator
 
-from interact import Message
+from conflux import Message
 
 SemanticTextStr = Annotated[str, "SemanticText"]
 

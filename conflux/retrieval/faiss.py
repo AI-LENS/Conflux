@@ -6,8 +6,8 @@ import faiss
 import numpy as np
 from faiss import Index
 
-from interact import Message
-from interact.retrieval import EncoderType, Record, VectorDB
+from conflux import Message
+from conflux.retrieval import EncoderType, Record, VectorDB
 
 logger = logging.getLogger(__name__)
 

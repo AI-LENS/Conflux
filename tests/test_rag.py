@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 import numpy as np
 
-from interact import handler
+from conflux import handler
 
 
 @handler
@@ -228,12 +228,12 @@ class dummy_client:
 
 
 def test_rag_example():
-    with (
-        patch("interact.handlers.OpenAiLLM", type(dummy_openai)),
-        patch("examples.rag_example.encode", dummy_encoder),
-    ):
-        import examples.rag_example as rag
+    import examples.rag_example as rag
 
+    with (
+        patch("conflux.handlers.OpenAiLLM", type(dummy_openai)),
+        patch.object(rag, "encode", dummy_encoder),
+    ):
         rag.main(dim=32)
 
 

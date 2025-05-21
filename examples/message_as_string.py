@@ -1,4 +1,4 @@
-from interact import Message
+from conflux import Message
 
 
 def main():

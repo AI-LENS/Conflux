@@ -1,12 +1,12 @@
-class InteractError(Exception):
+class ConfluxError(Exception):
     pass
 
 
-class HandlerChainError(InteractError):
+class HandlerChainError(ConfluxError):
     pass
 
 
-class HandlerError(InteractError):
+class HandlerError(ConfluxError):
     pass
 
 
