@@ -1,6 +1,6 @@
 [project]
 name = "conflux-ai"
-version = "0.6.3"
+version = "0.7.0"
 description = "Build prompt pipelines easily."
 authors = [{ name = "Pritam Dey", email = "pritamdey@ailens.ai" }]
 requires-python = "~=3.10"
@@ -42,3 +42,6 @@ testpaths = ["tests"]
 [tool.poe.tasks]
 precmt = "pre-commit run --all-files"
 test = "pytest"
+
+[project.urls]
+Repository = "https://github.com/AI-LENS/Conflux"
