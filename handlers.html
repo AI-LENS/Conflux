@@ -56,6 +56,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#conflux.handlers.GeminiLLM"><code class="docutils literal notranslate"><span class="pre">GeminiLLM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conflux.handlers.ManyToolCalls"><code class="docutils literal notranslate"><span class="pre">ManyToolCalls</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.ManyToolCalls.model_config"><code class="docutils literal notranslate"><span class="pre">ManyToolCalls.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.ManyToolCalls.tool_calls"><code class="docutils literal notranslate"><span class="pre">ManyToolCalls.tool_calls</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#conflux.handlers.McpToolCall"><code class="docutils literal notranslate"><span class="pre">McpToolCall</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.McpToolCall.many_tool_calls"><code class="docutils literal notranslate"><span class="pre">McpToolCall.many_tool_calls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.McpToolCall.process"><code class="docutils literal notranslate"><span class="pre">McpToolCall.process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.McpToolCall.role"><code class="docutils literal notranslate"><span class="pre">McpToolCall.role</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.McpToolCall.single_tool_call"><code class="docutils literal notranslate"><span class="pre">McpToolCall.single_tool_call()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#conflux.handlers.OpenAiLLM"><code class="docutils literal notranslate"><span class="pre">OpenAiLLM</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.OpenAiLLM.process"><code class="docutils literal notranslate"><span class="pre">OpenAiLLM.process()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.OpenAiLLM.request"><code class="docutils literal notranslate"><span class="pre">OpenAiLLM.request()</span></code></a></li>
@@ -68,6 +80,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#conflux.handlers.SimilarityRetriever"><code class="docutils literal notranslate"><span class="pre">SimilarityRetriever</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.SimilarityRetriever.process"><code class="docutils literal notranslate"><span class="pre">SimilarityRetriever.process()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.SimilarityRetriever.role"><code class="docutils literal notranslate"><span class="pre">SimilarityRetriever.role</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#conflux.handlers.SingleToolCall"><code class="docutils literal notranslate"><span class="pre">SingleToolCall</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.SingleToolCall.arguments"><code class="docutils literal notranslate"><span class="pre">SingleToolCall.arguments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.SingleToolCall.model_config"><code class="docutils literal notranslate"><span class="pre">SingleToolCall.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.SingleToolCall.tool_name"><code class="docutils literal notranslate"><span class="pre">SingleToolCall.tool_name</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -189,6 +207,97 @@ in the HandlerChain.variables dictionary.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="conflux.handlers.ManyToolCalls">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">conflux.handlers.</span></span><span class="sig-name descname"><span class="pre">ManyToolCalls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tool_calls</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#conflux.handlers.ManyToolCalls" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tool_calls</strong> (<em>list</em><em>[</em><a class="reference internal" href="#conflux.handlers.SingleToolCall" title="conflux.handlers.SingleToolCall"><em>SingleToolCall</em></a><em>]</em>)</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="conflux.handlers.ManyToolCalls.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#conflux.handlers.ManyToolCalls.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="conflux.handlers.ManyToolCalls.tool_calls">
+<span class="sig-name descname"><span class="pre">tool_calls</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#conflux.handlers.SingleToolCall" title="conflux.handlers.SingleToolCall"><span class="pre">SingleToolCall</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#conflux.handlers.ManyToolCalls.tool_calls" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="conflux.handlers.McpToolCall">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">conflux.handlers.</span></span><span class="sig-name descname"><span class="pre">McpToolCall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">llm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tool_call_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'single'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#conflux.handlers.McpToolCall" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#conflux.base.Handler" title="conflux.base.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>ClientTransport</em><em> | </em><em>FastMCP</em><em> | </em><em>MCPConfig</em><em> | </em><em>AnyUrl</em><em> | </em><em>Path</em><em> | </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>str</em>)</p></li>
+<li><p><strong>llm</strong> (<em>type</em><em>[</em><a class="reference internal" href="base.html#conflux.base.Handler" title="conflux.base.Handler"><em>Handler</em></a><em>]</em>)</p></li>
+<li><p><strong>tool_call_strategy</strong> (<em>Literal</em><em>[</em><em>'many'</em><em>, </em><em>'single'</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="conflux.handlers.McpToolCall.many_tool_calls">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">many_tool_calls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#conflux.handlers.McpToolCall.many_tool_calls" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>msg</strong> (<a class="reference internal" href="base.html#conflux.base.Message" title="conflux.base.Message"><em>Message</em></a>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#conflux.handlers.ManyToolCalls" title="conflux.handlers.ManyToolCalls"><em>ManyToolCalls</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="conflux.handlers.McpToolCall.process">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#conflux.handlers.McpToolCall.process" title="Link to this definition"></a></dt>
+<dd><p>Process a message and return a new transformed message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="base.html#conflux.base.Message" title="conflux.base.Message"><em>Message</em></a>) – Message to be processed / transformed.</p></li>
+<li><p><strong>chain</strong> (<a class="reference internal" href="base.html#conflux.base.HandlerChain" title="conflux.base.HandlerChain"><em>HandlerChain</em></a>) – Current HandlerChain object that is executing this handler.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – If the process method is not implemented.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Transformed message.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str | <a class="reference internal" href="base.html#conflux.base.Message" title="conflux.base.Message">Message</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="conflux.handlers.McpToolCall.role">
+<span class="sig-name descname"><span class="pre">role</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'mcp_tool_call'</span></em><a class="headerlink" href="#conflux.handlers.McpToolCall.role" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="conflux.handlers.McpToolCall.single_tool_call">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">single_tool_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#conflux.handlers.McpToolCall.single_tool_call" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>msg</strong> (<a class="reference internal" href="base.html#conflux.base.Message" title="conflux.base.Message"><em>Message</em></a>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#conflux.handlers.SingleToolCall" title="conflux.handlers.SingleToolCall"><em>SingleToolCall</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="conflux.handlers.OpenAiLLM">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">conflux.handlers.</span></span><span class="sig-name descname"><span class="pre">OpenAiLLM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gpt-4o-mini'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">openai_kwgs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#conflux.handlers.OpenAiLLM" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="base.html#conflux.base.Handler" title="conflux.base.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a></p>
@@ -231,7 +340,7 @@ in the HandlerChain.variables dictionary.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>completion_config</strong> (<em>dict</em>)</p></li>
-<li><p><strong>content</strong> (<em>str</em><em> | </em><em>Iterable</em><em>[</em><em>ChatCompletionContentPartTextParam</em><em> | </em><em>ChatCompletionContentPartImageParam</em><em> | </em><em>ChatCompletionContentPartInputAudioParam</em><em>]</em>)</p></li>
+<li><p><strong>content</strong> (<em>str</em><em> | </em><em>Iterable</em><em>[</em><em>ChatCompletionContentPartTextParam</em><em> | </em><em>ChatCompletionContentPartImageParam</em><em> | </em><em>ChatCompletionContentPartInputAudioParam</em><em> | </em><em>File</em><em>]</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -332,6 +441,36 @@ in the HandlerChain.variables dictionary.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="conflux.handlers.SimilarityRetriever.role">
 <span class="sig-name descname"><span class="pre">role</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'retriever'</span></em><a class="headerlink" href="#conflux.handlers.SimilarityRetriever.role" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="conflux.handlers.SingleToolCall">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">conflux.handlers.</span></span><span class="sig-name descname"><span class="pre">SingleToolCall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tool_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#conflux.handlers.SingleToolCall" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tool_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>arguments</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="conflux.handlers.SingleToolCall.arguments">
+<span class="sig-name descname"><span class="pre">arguments</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#conflux.handlers.SingleToolCall.arguments" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="conflux.handlers.SingleToolCall.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#conflux.handlers.SingleToolCall.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="conflux.handlers.SingleToolCall.tool_name">
+<span class="sig-name descname"><span class="pre">tool_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#conflux.handlers.SingleToolCall.tool_name" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>

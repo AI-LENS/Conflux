@@ -1,0 +1,5 @@
+mcp_tool_call
+=============
+
+.. literalinclude:: ../../examples/mcp_tool_call.py
+    
