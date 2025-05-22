@@ -9,3 +9,5 @@ explorations/
 .vscode/
 __pycache__
 .pytest_cache/
+
+dump*

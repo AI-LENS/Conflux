@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Callable, Iterable, TypeVar
+from typing import Callable, Iterable, Literal, TypeVar
 
 from openai import AsyncOpenAI
 from openai._utils import async_transform
@@ -11,7 +11,9 @@ from openai.types.chat.completion_create_params import CompletionCreateParams
 from pydantic import BaseModel
 
 from conflux import Handler, HandlerChain, Message
+from conflux.base import handler
 from conflux.exceptions import HandlerError
+from conflux.mcp.client import ClientTransportType, MCPClient
 from conflux.retrieval import Record, VectorDB
 
 
@@ -298,3 +300,107 @@ class SimilarityRetriever(Handler):
             return self.join_policy.join(str(record) for record in records)
         else:
             raise ValueError("Invalid join policy.")
+
+
+class SingleToolCall(BaseModel):
+    tool_name: str
+    arguments: dict[str, str]
+
+
+single_tool_call_schema = {
+    "type": "json_schema",
+    "json_schema": {
+        "name": "SingleToolCall",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "tool_name": {"type": "string"},
+                "arguments": {"type": "object"},
+            },
+            "required": ["tool_name", "arguments"],
+        },
+    },
+}
+
+
+class ManyToolCalls(BaseModel):
+    tool_calls: list[SingleToolCall]
+
+
+many_tool_calls_schema = {
+    "type": "json_schema",
+    "json_schema": {
+        "name": "ManyToolCalls",
+        "schema": {
+            "type": "object",
+            "properties": {
+                "tool_calls": {
+                    "type": "array",
+                    "items": single_tool_call_schema["json_schema"]["schema"],
+                }
+            },
+            "required": ["tool_calls"],
+        },
+    },
+}
+
+
+class McpToolCall(Handler):
+    role = "mcp_tool_call"
+
+    def __init__(
+        self,
+        config: ClientTransportType,
+        *,
+        llm: type[Handler],
+        tool_call_strategy: Literal["many", "single"] = "single",
+    ) -> None:
+        self.config = config
+        self.llm = llm
+        self.client = MCPClient(config)
+        self.tool_call_strategy = tool_call_strategy
+
+    async def single_tool_call(self, msg: Message) -> SingleToolCall:
+        import json
+
+        @handler
+        async def prompt(msg: Message, chain: HandlerChain) -> str:
+            prompt = "Given the following instruction, please call the correct tool with the correct arguments from the given list of tools. "
+            prompt += f"# Instruction\n{msg}\n\n"
+            prompt += "# Tools\n" + await self.client.list_tools()
+            prompt += "\n\nCarefully choose the correct tool and arguments from the list of tools. "
+            return prompt
+
+        chain = prompt >> self.llm(structure=single_tool_call_schema)  # type: ignore
+        res = await chain.run(msg)
+        return SingleToolCall(**json.loads(res.primary))
+
+    async def many_tool_calls(self, msg: Message) -> ManyToolCalls:
+        @handler
+        async def prompt(msg: Message, chain: HandlerChain) -> str:
+            prompt = "Given the following instruction, please call the correct tools with the correct arguments from the given list of tools. You can call multiple tools to complete the task."
+            prompt += f"# Instruction\n{msg}\n\n"
+            prompt += "# Tools\n" + await self.client.list_tools()
+            prompt += "\n\nCarefully choose the correct tools and arguments from the list of tools. "
+            return prompt
+
+        chain = prompt >> self.llm(structure=many_tool_calls_schema)  # type: ignore
+        res = await chain.run(msg)
+        return ManyToolCalls(**json.loads(res.primary))
+
+    async def process(self, msg: Message, chain: HandlerChain) -> str:
+        async with self.client.client:
+            if self.tool_call_strategy == "single":
+                tool_call = await self.single_tool_call(msg)
+                return await self.client.call_tool(
+                    tool_call.tool_name, tool_call.arguments
+                )
+            else:
+                tool_calls = await self.many_tool_calls(msg)
+                results = []
+                for tool_call in tool_calls.tool_calls:
+                    result = await self.client.call_tool(
+                        tool_call.tool_name, tool_call.arguments
+                    )
+                    results.append(result)
+                return "\n\n".join(results)

@@ -6,11 +6,11 @@ authors = [{ name = "Pritam Dey", email = "pritamdey@ailens.ai" }]
 requires-python = "~=3.10"
 readme = "README.md"
 dependencies = [
-    "fastmcp",
+    "fastmcp>=2.4.0",
     "numpy>1.25.0, <3.0.0",
-    "openai~=1.12",
+    "openai~=1.81",
     "pillow~=10.0",
-    "pydantic>=2.8.0,<3",
+    "pydantic>=2.11.4,<3",
 ]
 
 [project.optional-dependencies]
@@ -36,8 +36,6 @@ addopts = ""
 minversion = "8.0"
 testpaths = ["tests"]
 
-[tool.uv.sources]
-fastmcp = { git = "https://github.com/jlowin/fastmcp.git", rev = "725f256a8f1c23b584135d5e8461fae9edb081ba" }
-
 [tool.poe.tasks]
 precmt = "pre-commit run --all-files"
+test = "pytest"
