@@ -5,7 +5,10 @@ from conflux.handlers import McpToolCall, OpenAiLLM
 
 config = {
     "mcpServers": {
-        "explorer": {"url": "http://localhost:9000/mcp/sse", "transportType": "sse"}
+        "explorer": {
+            "url": "http://localhost:9090/yahoo-finance/sse",
+            "transportType": "sse",
+        }
     }
 }
 
@@ -18,7 +21,7 @@ async def fetch_tool_list(msg: Message, chain: HandlerChain) -> str:
 
 @handler
 async def answer(msg: Message, chain: HandlerChain) -> str:
-    return f"Answer the following query:\n{chain.variables['query']}\n\nHere is a result of appropriate tool for the query:\n{msg}\n\nAnswer the query using the tool result."
+    return f"Please answer the following query:\n{chain.variables['query']}\n\nHere is the result from the relevant tool for the query:\n{msg}\n\nProvide a comprehensive answer to the query using the tool result."
 
 
 def main():
@@ -30,7 +33,7 @@ def main():
     )
     return asyncio.run(
         chain.run(
-            "Get all the columns of /workspace/input/sdtm/ae.csv",
+            "What is the stock price of nifty 50 (^NSEI) today (23-05-2025)?",
         )
     )
 
