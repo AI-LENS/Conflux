@@ -114,7 +114,7 @@ class GeminiLLM(OpenAiLLM):
     def __init__(
         self,
         role: str | None = None,
-        model: str = "gemini-1.5-flash",
+        model: str = "gemini-2.5-flash-preview-05-20",
         structure: type[BaseModel] | None = None,
         **openai_kwgs,
     ) -> None:
@@ -125,6 +125,26 @@ class GeminiLLM(OpenAiLLM):
         if "api_key" not in openai_kwgs and api_key:
             openai_kwgs["api_key"] = api_key
         super().__init__(role=role, model=model, structure=structure, **openai_kwgs)
+
+
+class OpenRouterLLM(OpenAiLLM):
+    def __init__(
+        self,
+        role: str | None = None,
+        model: str = "anthropic/claude-sonnet-4",
+        structure: type[BaseModel] | None = None,
+        extra_headers: dict | None = None,
+        extra_body: dict | None = None,
+        **openai_kwgs,
+    ) -> None:
+        openai_kwgs["base_url"] = "https://openrouter.ai/api/v1"
+        api_key = os.getenv("OPENROUTER_API_KEY")
+        if "api_key" not in openai_kwgs and api_key:
+            openai_kwgs["api_key"] = api_key
+        self.extra_headers = extra_headers or {}
+        self.extra_body = extra_body or {}
+        super().__init__(role=role, model=model, structure=structure, **openai_kwgs)
+
 
 
 class AssignRole(Handler):
@@ -354,11 +374,13 @@ class McpToolCall(Handler):
         *,
         llm: type[Handler],
         tool_call_strategy: Literal["many", "single"] = "single",
+        **llm_kwgs,
     ) -> None:
         self.config = config
         self.llm = llm
         self.client = MCPClient(config)
         self.tool_call_strategy = tool_call_strategy
+        self.llm_kwgs = llm_kwgs
 
     async def single_tool_call(self, msg: Message) -> SingleToolCall:
         import json
@@ -371,7 +393,7 @@ class McpToolCall(Handler):
             prompt += "\n\nCarefully choose the correct tool and arguments from the list of tools. "
             return prompt
 
-        chain = prompt >> self.llm(structure=single_tool_call_schema)  # type: ignore
+        chain = prompt >> self.llm(structure=single_tool_call_schema, **self.llm_kwgs)  # type: ignore
         res = await chain.run(msg)
         return SingleToolCall(**json.loads(res.primary))
 
