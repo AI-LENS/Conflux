@@ -73,6 +73,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.OpenAiLLM.request"><code class="docutils literal notranslate"><span class="pre">OpenAiLLM.request()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#conflux.handlers.OpenRouterLLM"><code class="docutils literal notranslate"><span class="pre">OpenRouterLLM</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#conflux.handlers.RetryHandlerChain"><code class="docutils literal notranslate"><span class="pre">RetryHandlerChain</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#conflux.handlers.RetryHandlerChain.process"><code class="docutils literal notranslate"><span class="pre">RetryHandlerChain.process()</span></code></a></li>
 </ul>
@@ -193,7 +194,7 @@ in the HandlerChain.variables dictionary.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="conflux.handlers.GeminiLLM">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">conflux.handlers.</span></span><span class="sig-name descname"><span class="pre">GeminiLLM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gemini-1.5-flash'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">openai_kwgs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#conflux.handlers.GeminiLLM" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">conflux.handlers.</span></span><span class="sig-name descname"><span class="pre">GeminiLLM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gemini-2.5-flash-preview-05-20'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">openai_kwgs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#conflux.handlers.GeminiLLM" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#conflux.handlers.OpenAiLLM" title="conflux.handlers.OpenAiLLM"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAiLLM</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -230,7 +231,7 @@ in the HandlerChain.variables dictionary.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="conflux.handlers.McpToolCall">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">conflux.handlers.</span></span><span class="sig-name descname"><span class="pre">McpToolCall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">llm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tool_call_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'single'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#conflux.handlers.McpToolCall" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">conflux.handlers.</span></span><span class="sig-name descname"><span class="pre">McpToolCall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">llm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tool_call_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'single'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">llm_kwgs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#conflux.handlers.McpToolCall" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="base.html#conflux.base.Handler" title="conflux.base.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -349,6 +350,23 @@ in the HandlerChain.variables dictionary.</p>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="conflux.handlers.OpenRouterLLM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">conflux.handlers.</span></span><span class="sig-name descname"><span class="pre">OpenRouterLLM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'anthropic/claude-sonnet-4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">openai_kwgs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#conflux.handlers.OpenRouterLLM" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#conflux.handlers.OpenAiLLM" title="conflux.handlers.OpenAiLLM"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAiLLM</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>role</strong> (<em>str</em>)</p></li>
+<li><p><strong>model</strong> (<em>str</em>)</p></li>
+<li><p><strong>structure</strong> (<em>type</em><em>[</em><em>BaseModel</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>extra_headers</strong> (<em>dict</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>extra_body</strong> (<em>dict</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
