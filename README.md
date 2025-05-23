@@ -29,7 +29,7 @@ pip install conflux-ai
 or, if you use faiss for similarity search:
 
 ```bash
-pip install -U "conflux-ai[faiss]"
+pip install -U conflux-ai[faiss]
 ```
 
 ## Example Usage
@@ -70,10 +70,10 @@ if __name__ == "__main__":
 
 Explore more advanced usage patterns and integrations in the `examples/` directory:
 
-- [MCP Tool Call Example](examples/mcp_tool_call.py): How to call tools from an MCP (Model Context Protocol) server as part of your handler chain.
-- [Retrieval-Augmented Generation (RAG) Example](examples/rag_example.py): How to build a RAG pipeline using OpenAI embeddings and a FAISS vector index.
+- [MCP Tool Call Example](https://github.com/AI-LENS/Conflux/blob/main/examples/mcp_tool_call.py): How to call tools from an MCP (Model Context Protocol) server as part of your handler chain.
+- [Retrieval-Augmented Generation (RAG) Example](https://github.com/AI-LENS/Conflux/blob/main/examples/rag_example.py): How to build a RAG pipeline using OpenAI embeddings and a FAISS vector index.
 
-For more, see the `examples/` folder in the repository.
+For more, see the [`examples`](https://github.com/AI-LENS/Conflux/tree/main/examples) folder in the repository.
 
 ## Why Conflux?
 
