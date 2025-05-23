@@ -146,7 +146,6 @@ class OpenRouterLLM(OpenAiLLM):
         super().__init__(role=role, model=model, structure=structure, **openai_kwgs)
 
 
-
 class AssignRole(Handler):
     """Assign a role to the last message sent to this Handler by the current HandlerChain."""
 

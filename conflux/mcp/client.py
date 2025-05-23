@@ -25,8 +25,13 @@ class MCPClient:
         tools = await self.client.list_tools()
         descriptions = "Available tools:\n"
         for tool in tools:
-            descriptions += f"## {tool.name}\n### {tool.description}\n\n"
-
+            descriptions += f"## {tool.name}\n{tool.description}\nArguments:\n"
+            properties = tool.inputSchema.get("properties", {})
+            for arg, meta in properties.items():
+                arg_type = meta.get("type", "")
+                arg_desc = meta.get("description", "")
+                descriptions += f"* {arg}: {arg_type}\n    {arg_desc}\n"
+            descriptions += "\n"
         return descriptions
 
     async def call_tool(
