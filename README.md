@@ -1,8 +1,26 @@
 # Conflux
 
+[![PyPI version](https://img.shields.io/pypi/v/conflux-ai.svg)](https://pypi.org/project/conflux-ai/) [![License](https://img.shields.io/github/license/AI-LENS/Conflux)](LICENSE)
+
 A simple Python library to build prompt pipelines and applications with Large Language Models (LLMs). Conflux is designed for flexibility, composability, and ease of use, making it easy to create complex LLM workflows.
 
+**Key Features:**
+
+- Build modular, composable LLM pipelines with minimal code
+- Integrate with OpenAI, Gemini, FAISS, and more
+- Full control over prompt engineering and execution
+- Intuitive, Pythonic API for rapid prototyping and production
+
+**Use Cases:**
+
+- Prompt chaining and orchestration
+- Retrieval-augmented generation (RAG)
+- Tool-calling and agent workflows
+- Custom LLM-powered applications
+
 ## Core Concept
+
+> **Note:** The following diagram uses Mermaid syntax. If your Markdown viewer does not support Mermaid, please refer to the [docs](https://ai-lens.github.io/Conflux/) for a static image.
 
 ```mermaid
 graph LR
@@ -14,6 +32,8 @@ graph LR
     C --> Output["Output (Message)"]
 ```
 
+A **HandlerChain** is a sequence of handlers that process messages step by step. This enables you to build complex LLM workflows by composing simple, reusable components.
+
 Conflux has three main components:
 
 - **Messages**: Entities in an application communicate through `Message` objects.
@@ -22,17 +42,26 @@ Conflux has three main components:
 
 ## Installation
 
+**Requirements:**
+
+- Python 3.12+
+- Windows, macOS, or Linux
+
+Install the core package:
+
 ```bash
 pip install conflux-ai
 ```
 
-or, if you use faiss for similarity search:
+Or, if you use FAISS for similarity search:
 
 ```bash
 pip install -U conflux-ai[faiss]
 ```
 
 ## Example Usage
+
+Below is a simple example that generates a company name and tagline using OpenAI's LLM. (Requires an OpenAI API key set as the `OPENAI_API_KEY` environment variable.) You can also replace `OpenAiLLM` with `GeminiLLM` to use Google's Gemini LLM using `GOOGLE_API_KEY`.
 
 ```python
 import asyncio
@@ -63,7 +92,7 @@ def main():
     print(res)
 
 if __name__ == "__main__":
-    main() # Socket: The best socks in the world
+    main()  # Example output: Socket: The best socks in the world
 ```
 
 # Advanced Examples
@@ -78,5 +107,3 @@ For more, see the [`examples`](https://github.com/AI-LENS/Conflux/tree/main/exam
 ## Why Conflux?
 
 Applications with LLMs can get complex quickly. Conflux is designed for simplicity and scalability, giving you control over prompts and execution while maintaining an intuitive API. Unlike more rigid frameworks, Conflux lets you customize every step of your pipeline.
-
----
